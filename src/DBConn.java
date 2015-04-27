@@ -47,6 +47,8 @@ public class DBConn
 	
 	private static void printResult(ResultSet rs)
 	{
+		System.out.println();
+		
 		try {
 			while(rs.next())
 			{
@@ -59,6 +61,8 @@ public class DBConn
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println();
 	}
 	
 	private static Connection getConnection() throws SQLException
