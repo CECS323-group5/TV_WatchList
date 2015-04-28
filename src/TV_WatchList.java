@@ -1,14 +1,13 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TV_WatchList 
 {
 	/*
-	 * 1.) Make a query
-	 * 		a.) sql query
-	 * 		b.) sql query
-	 * 		c.) sql query
-	 * 2.) Insert
-	 * 3.) Delete row
+	 * Three print statements
+	 * update SQL
+	 * Delete and Insert
+	 * ask for username and password
 	 */
 	
 	public static Scanner scan;
@@ -16,15 +15,24 @@ public class TV_WatchList
 	
 	public static void main(String[] args) 
 	{
-		conn = new DBConn();
-		scan = new Scanner(System.in);
+		scan = new Scanner(System.in);	
+		connectionMenu();
 		
 		showMenu();
 		
 		scan.close();
 		conn.closeConnection();
 	}
-	
+	public static void connectionMenu()
+	{
+		String username = "";
+		String password = "";
+		System.out.println("Enter Database Username:");
+		username = scan.nextLine();
+		System.out.println("Enter Database Password:");
+		password = scan.nextLine();
+		conn = new DBConn(username, password);
+	}
 	public static void showMenu()
 	{
 		int choice = 0;
@@ -44,16 +52,14 @@ public class TV_WatchList
 				showSubMenu();
 				break;
 			case 2:
-				//TODO insert data
+				conn.transaction(Statements.insert);
 				break;
 			case 3:
-				//TODO delete row
+				conn.transaction(Statements.delete);
 				break;
 			case 4:
 				return;
 			}
-			
-			
 		} while (choice != 4);
 	}
 
@@ -63,8 +69,8 @@ public class TV_WatchList
 		
 		do
 		{
-			System.out.println("1.) Query1."
-					+ "\n2.) Query2."
+			System.out.println("1.) Retrieve all the videos title, synopsys and the staff name and lastname of the guy which is the olsdest producer."
+					+ "\n2.) Retrieve all the videos which is a SportingEvents and the league is football and show the information about title, sysnopsis, number of staff working on it."
 					+ "\n3.) Query3"
 					+ "\n4.) Back.");
 			
@@ -73,13 +79,13 @@ public class TV_WatchList
 			switch (choice)
 			{
 			case 1:
-				conn.query(Statements.query1);
+				conn.query(Statements.query1, choice);
 				break;
 			case 2:
-				//TODO query2
+				conn.query(Statements.query2, choice);
 				break;
 			case 3:
-				//TODO query3
+				conn.query(Statements.query3, choice);
 				break;
 			case 4:
 				return;
