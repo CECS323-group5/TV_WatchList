@@ -4,8 +4,9 @@ import java.util.Scanner;
 public class TV_WatchList 
 {
 	/*
-	 * Three print statements
-	 * Delete and Insert
+	 * Ask About gracefullness
+	 * ask about rollback
+	 * format
 	 */
 	
 	public static Scanner scan;
@@ -53,8 +54,20 @@ public class TV_WatchList
 				conn.transaction(Statements.insert);
 				break;
 			case 3:
-				System.out.println("Summary of consequences");
-				conn.transaction(Statements.delete);
+				String ans = "";
+				do
+				{
+					ans = scan.nextLine();
+					if(ans.toUpperCase().equals("Y"))
+					{
+						conn.transaction(Statements.delete);
+					}
+					else if(ans.toUpperCase().equals("N"))
+					{
+						break;
+					}
+					System.out.println("Warning deleting a row of data can effect the row it is referenced by. Continue... (Y/N)");
+				}while(!(ans.toUpperCase().equals("N") || ans.toUpperCase().equals("Y")));
 				break;
 			case 4:
 				return;

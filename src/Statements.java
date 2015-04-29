@@ -6,7 +6,7 @@ public class Statements
 				+ ",v.synopsys"
 				+ ",s.fname"
 				+ ",s.lname"
-				+ ",s.dob"
+				+ ",s.dob "
 			+ "FROM Videos v "
 			+ "INNER JOIN Credit c ON v.ID = c.IDVideo "
 			+ "INNER JOIN Staff s ON c.IDStaff = s.ID "
@@ -18,10 +18,10 @@ public class Statements
 			+ "GROUP BY v.title;";
 	public static final String query2 = 
 			"SELECT v.title"
-				+ ",v.synopsys,"
-				+ ",COUNT(s.ID) AS NumberOfStaff," 
-				+ ",se.league,"
-				+ ",se.teams AS NumberOfStaff "
+				+ ",v.synopsys"
+				+ ",COUNT(s.ID) AS NumberOfStaff" 
+				+ ",se.league"
+				+ ",se.teams AS teams " // Change to Teams 
 			+ "FROM Videos v "
 			+ "INNER JOIN SportingEvents se ON v.ID = se.IDVideo "
 			+ "INNER JOIN Credit c ON v.ID = c.IDVideo "
@@ -48,20 +48,20 @@ public class Statements
 	
 	// Videos is a parent of 
 	public static final String delete = 
-			"DELETE FROM Videos v "
-			+ "WHERE v.title=\"Basketball games\" AND "
-			+ "v.synopsys=\"team2 vs opponent2 tonight who will win to acceed to the final versus LA Clippers\";";
+			"DELETE FROM sql367377.Videos "
+			+ "WHERE title =\"Basketball games\" AND "
+			+ "synopsys =\"team2 vs opponent2 tonight who will win to acceed to the final versus LA Clippers\";";
 	
 	// Sporting event is a child of videos
 	public static final String insert = 
-			"INSERT INTO SportingEvents ("
+			"INSERT INTO sql367377.SportingEvents ("
 				+ "IDVideo"
 				+ ",teams"
 				+ ",league"
 				+ ") "
 			+ "VALUES ("
-				+ "9"
-				+ ",\"team6 vs opponent6\""
+				+ "100"
+				+ ",\"team10 vs opponent15\""
 				+ ",\"football\""
 				+ ");";
 }
