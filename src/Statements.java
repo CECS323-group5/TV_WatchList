@@ -51,6 +51,7 @@ public class Statements
 			"DELETE FROM Videos v "
 			+ "WHERE v.title=\"Basketball games\" AND "
 			+ "v.synopsys=\"team2 vs opponent2 tonight who will win to acceed to the final versus LA Clippers\";";
+	
 	// Sporting event is a child of videos
 	public static final String insert = 
 			"INSERT INTO SportingEvents ("

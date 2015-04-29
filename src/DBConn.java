@@ -104,13 +104,19 @@ public class DBConn
 			System.out.println(columns[i] + "\t");
 		}
 		
-		
-		
 		try {
 			while(rs.next())
 			{
-				String name = rs.getString("username");
-				System.out.println(name);
+				String title = rs.getString("title");
+				System.out.println(title);
+				String synopys = rs.getString("synopys");
+				System.out.println(synopys);
+				String fname = rs.getString("fname");
+				System.out.println(fname);
+				String lname = rs.getString("lname");
+				System.out.println(lname);
+				String dob = rs.getString("dob");
+				System.out.println(dob);
 			}
 			
 			if(rs!= null) 
