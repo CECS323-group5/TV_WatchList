@@ -5,9 +5,7 @@ public class TV_WatchList
 {
 	/*
 	 * Three print statements
-	 * update SQL
 	 * Delete and Insert
-	 * ask for username and password
 	 */
 	
 	public static Scanner scan;
@@ -55,6 +53,7 @@ public class TV_WatchList
 				conn.transaction(Statements.insert);
 				break;
 			case 3:
+				System.out.println("Summary of consequences");
 				conn.transaction(Statements.delete);
 				break;
 			case 4:
@@ -71,7 +70,7 @@ public class TV_WatchList
 		{
 			System.out.println("1.) Retrieve all the videos title, synopsys and the staff name and lastname of the guy which is the olsdest producer."
 					+ "\n2.) Retrieve all the videos which is a SportingEvents and the league is football and show the information about title, sysnopsis, number of staff working on it."
-					+ "\n3.) Query3"
+					+ "\n3.) Retrieve all the movie title, synopsys and average grade of each video which have a grade and this grade have to be superior than 2."
 					+ "\n4.) Back.");
 			
 			choice = scan.nextInt();
