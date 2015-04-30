@@ -19,8 +19,29 @@ public class DBConn
 		//pass = p;
 		try {
 			conn = getConnection();
+			conn.setAutoCommit(false);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		}
+	}
+	
+	public void com()
+	{
+		try {
+			conn.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void roll()
+	{
+		try {
+			conn.rollback();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -54,12 +75,8 @@ public class DBConn
 	{	
 		Statement stmt = null;
 		try {
-			conn.setAutoCommit(false);
 			stmt = conn.createStatement();
 			stmt.executeUpdate(sql);
-			conn.commit();
-			//conn.rollback(); // Ask about me
-
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
@@ -95,6 +112,7 @@ public class DBConn
 	
 	private static void printResult1(ResultSet rs)
 	{
+		StringBuilder sb=new StringBuilder();
 		String[] columns = new String[5];
 		columns[0] = "title";
 		columns[1] = "synopys";
@@ -102,41 +120,39 @@ public class DBConn
 		columns[3] = "lname";
 		columns[4] = "dob";
 		
-		System.out.println();
-		
-		for (int i = 0; i < 5; i++)
-		{
-			System.out.print(columns[i].toUpperCase() + "\t");
-		}
-		System.out.println();
+		sb.append(String.format("| %-30s",columns[0].toUpperCase()));
+		sb.append(String.format("| %-70s",columns[1].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[2].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[3].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[4].toUpperCase()));
+		sb.append("\n");
 		
 		try {
 			while(rs.next())
 			{
 				String title = rs.getString("title");
-				System.out.print(title + " ");
+				sb.append(String.format("| %-30s",title));
 				String synopys = rs.getString("synopsys");
-				System.out.print(synopys+ " ");
+				sb.append(String.format("| %-70s",synopys));
 				String fname = rs.getString("fname");
-				System.out.print(fname + " ");
+				sb.append(String.format("| %-10s",fname));
 				String lname = rs.getString("lname");
-				System.out.print(lname + " ");
+				sb.append(String.format("| %-10s",lname));
 				String dob = rs.getString("dob");
-				System.out.print(dob + " ");
-				System.out.println();
+				sb.append(String.format("| %-10s",dob + "\n"));
 			}
-			
+			System.out.println(sb);
 			if(rs!= null) 
 				rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		System.out.println();
 	}
 	
 	private static void printResult2(ResultSet rs)
 	{
+		StringBuilder sb=new StringBuilder();
 		String[] columns = new String[5];
 		columns[0] = "title";
 		columns[1] = "synopsys";
@@ -144,29 +160,28 @@ public class DBConn
 		columns[3] = "league";
 		columns[4] = "teams";
 		
-		System.out.println();
-		
-		for (int i = 0; i < 5; i++)
-		{
-			System.out.print(columns[i].toUpperCase() + "\t");
-		}
-		System.out.println();
+		sb.append(String.format("| %-30s",columns[0].toUpperCase()));
+		sb.append(String.format("| %-70s",columns[1].toUpperCase()));
+		sb.append(String.format("| %-20s",columns[2].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[3].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[4].toUpperCase()));
+		sb.append("\n");
 		
 		try {
 			while(rs.next())
 			{
 				String c1 = rs.getString(columns[0]);
-				System.out.print(c1 + " ");
+				sb.append(String.format("| %-30s",c1));
 				String c2 = rs.getString(columns[1]);
-				System.out.print(c2 + " ");
+				sb.append(String.format("| %-70s",c2));
 				String c3 = rs.getString(columns[2]);
-				System.out.print(c3 + " ");
+				sb.append(String.format("| %-20s",c3));
 				String c4 = rs.getString(columns[3]);
-				System.out.print(c4 + " ");
+				sb.append(String.format("| %-10s",c4));
 				String c5 = rs.getString(columns[4]);
-				System.out.print(c5 + " ");
-				System.out.println();
+				sb.append(String.format("| %-10s",c5 + "\n"));
 			}
+			System.out.println(sb);
 			
 			if(rs!= null) 
 				rs.close();
@@ -179,31 +194,28 @@ public class DBConn
 	
 	private static void printResult3(ResultSet rs)
 	{
+		StringBuilder sb=new StringBuilder();
 		String[] columns = new String[3];
 		columns[0] = "title";
 		columns[1] = "synopsys";
 		columns[2] = "AverageGrade";
-		
-		System.out.println();
-		
-		for (int i = 0; i < columns.length; i++)
-		{
-			System.out.print(columns[i].toUpperCase() + "\t");
-		}
-		System.out.println();
-		
+		sb.append(String.format("| %-30s",columns[0].toUpperCase()));
+		sb.append(String.format("| %-70s",columns[1].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[2].toUpperCase()));
+		sb.append("\n");
+			
 		try {
 			while(rs.next())
 			{
 				String c1 = rs.getString(columns[0]);
-				System.out.print(c1 + " ");
+				sb.append(String.format("| %-30s",c1));
 				String c2 = rs.getString(columns[1]);
-				System.out.print(c2 + " ");
+				sb.append(String.format("| %-70s",c2));
 				String c3 = rs.getString(columns[2]);
-				System.out.print(c3 + " ");
-				System.out.println();
+				sb.append(String.format("| %-10s",c3));
+				sb.append("\n");
 			}
-			
+			System.out.println(sb);
 			if(rs!= null) 
 				rs.close();
 		} catch (SQLException e) {

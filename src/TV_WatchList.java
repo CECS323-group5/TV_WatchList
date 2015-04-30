@@ -5,7 +5,6 @@ public class TV_WatchList
 {
 	/*
 	 * Ask About gracefullness
-	 * ask about rollback
 	 * format
 	 */
 	
@@ -41,7 +40,9 @@ public class TV_WatchList
 			System.out.println("1.) Make a query."
 					+ "\n2.) Insert Data."
 					+ "\n3.) Delete row."
-					+ "\n4.) Quit.");
+					+ "\n4.) Commit."
+					+ "\n5.) RollBack."
+					+ "\n6.) Quit.");
 			
 			choice = scan.nextInt();
 			
@@ -70,9 +71,32 @@ public class TV_WatchList
 				}while(!(ans.toUpperCase().equals("N") || ans.toUpperCase().equals("Y")));
 				break;
 			case 4:
-				return;
+				conn.com();
+				System.out.println("Changes commited.");
+				break;
+			case 5:
+				conn.roll();
+				System.out.println("RollBack changes.");
+				break;
+			case 6:
+				String exitAns;
+				do
+				{
+					exitAns = scan.nextLine();
+					if(exitAns.toUpperCase().equals("Y"))
+					{
+						choice = 0;
+						break;
+					}
+					else if(exitAns.toUpperCase().equals("N"))
+					{
+						break;
+					}
+					System.out.println("Before exiting do you want any previous work to be commited or rolled back... (Y/N)");
+				}while(!(exitAns.toUpperCase().equals("N") || exitAns.toUpperCase().equals("Y")));
+				break;
 			}
-		} while (choice != 4);
+		} while (choice != 6);
 	}
 
 	private static void showSubMenu()
