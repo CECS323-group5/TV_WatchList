@@ -33,41 +33,57 @@ public class TV_WatchList
 	}
 	public static void showMenu()
 	{
-		int choice = 0;
+		String choice = "";
 		
 		do
 		{
 			System.out.println("1.) Make a query."
-					+ "\n2.) Insert Data."
-					+ "\n3.) Delete row."
+					+ "\n2.) Insert new TV."
+					+ "\n3.) Delete row Staff."
 					+ "\n4.) Commit."
 					+ "\n5.) RollBack."
 					+ "\n6.) Quit.");
 			
-			choice = scan.nextInt();
+			choice = scan.nextLine();
 			
-			switch (choice)
+			switch (Integer.valueOf(choice))
 			{
 			case 1:
 				showSubMenu();
 				break;
 			case 2:
-				conn.transaction(Statements.insert);
+				System.out.println("Enter title: ");
+				String title = scan.nextLine();
+				System.out.println("Enter duration: ");
+				String duration = scan.nextLine();
+				System.out.println("Enter synopsys: ");
+				String synopsys = scan.nextLine();
+				System.out.println("Enter network: ");
+				String network = scan.nextLine();
+				System.out.println("Enter rating: ");
+				String rating = scan.nextLine();
+				conn.transaction(Statements.insert(title, duration, synopsys, network, rating));
+				conn.query(Statements.query4, 4);
 				break;
 			case 3:
 				String ans = "";
 				do
 				{
+					System.out.println("Warning deleting a row of data can effect the row it is referenced by. Continue... (Y/N)");
 					ans = scan.nextLine();
+					conn.query(Statements.query5, 5);
 					if(ans.toUpperCase().equals("Y"))
 					{
-						conn.transaction(Statements.delete);
+						System.out.println("Enter first name: ");
+						String first = scan.nextLine();
+						System.out.println("Enter last name: ");
+						String last = scan.nextLine();
+						conn.transaction(Statements.delete(first, last));
 					}
 					else if(ans.toUpperCase().equals("N"))
 					{
 						break;
 					}
-					System.out.println("Warning deleting a row of data can effect the row it is referenced by. Continue... (Y/N)");
 				}while(!(ans.toUpperCase().equals("N") || ans.toUpperCase().equals("Y")));
 				break;
 			case 4:
@@ -85,7 +101,7 @@ public class TV_WatchList
 					exitAns = scan.nextLine();
 					if(exitAns.toUpperCase().equals("Y"))
 					{
-						choice = 0;
+						choice = "0";
 						break;
 					}
 					else if(exitAns.toUpperCase().equals("N"))
@@ -96,7 +112,7 @@ public class TV_WatchList
 				}while(!(exitAns.toUpperCase().equals("N") || exitAns.toUpperCase().equals("Y")));
 				break;
 			}
-		} while (choice != 6);
+		} while (Integer.valueOf(choice) != 6);
 	}
 
 	private static void showSubMenu()

@@ -62,6 +62,11 @@ public class DBConn
 				case 3:
 					printResult3(rs);
 					break;
+				case 4:
+					printInsert(rs);
+					break;
+				case 5:
+					printDelete(rs);
 			}
 			
 			if(stmt!= null) 
@@ -213,6 +218,88 @@ public class DBConn
 				sb.append(String.format("| %-70s",c2));
 				String c3 = rs.getString(columns[2]);
 				sb.append(String.format("| %-10s",c3));
+				sb.append("\n");
+			}
+			System.out.println(sb);
+			if(rs!= null) 
+				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println();
+	}
+	
+	private static void printDelete(ResultSet rs)
+	{
+		StringBuilder sb=new StringBuilder();
+		String[] columns = new String[5];
+		columns[0] = "fname";
+		columns[1] = "lname";
+		columns[2] = "dob";
+		columns[3] = "autobiography";
+		columns[4] = "roleName";
+		sb.append(String.format("| %-10s",columns[0].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[1].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[2].toUpperCase()));
+		sb.append(String.format("| %-80s",columns[3].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[4].toUpperCase()));
+		sb.append("\n");
+			
+		try {
+			while(rs.next())
+			{
+				String c1 = rs.getString(columns[0]);
+				sb.append(String.format("| %-10s",c1));
+				String c2 = rs.getString(columns[1]);
+				sb.append(String.format("| %-10s",c2));
+				String c3 = rs.getString(columns[2]);
+				sb.append(String.format("| %-10s",c3));
+				String c4 = rs.getString(columns[3]);
+				sb.append(String.format("| %-80s",c4));
+				String c5 = rs.getString(columns[4]);
+				sb.append(String.format("| %-10s",c5));
+				sb.append("\n");
+			}
+			System.out.println(sb);
+			if(rs!= null) 
+				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println();
+	}
+	
+	private static void printInsert(ResultSet rs)
+	{
+		StringBuilder sb=new StringBuilder();
+		String[] columns = new String[5];
+		columns[0] = "title";
+		columns[1] = "totalDuration";
+		columns[2] = "synopsys";
+		columns[3] = "network";
+		columns[4] = "pg_rating";
+		sb.append(String.format("| %-30s",columns[0].toUpperCase()));
+		sb.append(String.format("| %-20s",columns[1].toUpperCase()));
+		sb.append(String.format("| %-100s",columns[2].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[3].toUpperCase()));
+		sb.append(String.format("| %-10s",columns[4].toUpperCase()));
+		sb.append("\n");
+			
+		try {
+			while(rs.next())
+			{
+				String c1 = rs.getString(columns[0]);
+				sb.append(String.format("| %-30s",c1));
+				String c2 = rs.getString(columns[1]);
+				sb.append(String.format("| %-20s",c2));
+				String c3 = rs.getString(columns[2]);
+				sb.append(String.format("| %-100s",c3));
+				String c4 = rs.getString(columns[3]);
+				sb.append(String.format("| %-10s",c4));
+				String c5 = rs.getString(columns[4]);
+				sb.append(String.format("| %-10s",c5));
 				sb.append("\n");
 			}
 			System.out.println(sb);

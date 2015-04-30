@@ -46,22 +46,36 @@ public class Statements
 			+ "GROUP BY v.title"
 				+ ",v.synopsys;";
 	
+	public static final String query4 = "SELECT * FROM sql367377.TVShow;";
+	public static final String query5 = "SELECT * FROM sql367377.Staff;";
 	// Videos is a parent of 
-	public static final String delete = 
-			"DELETE FROM sql367377.Videos "
-			+ "WHERE title =\"Basketball games\" AND "
-			+ "synopsys =\"team2 vs opponent2 tonight who will win to acceed to the final versus LA Clippers\";";
+	public static String delete(String f, String l)
+	{ 
+			return "DELETE FROM sql367377.Staff "
+			+ "WHERE fname =\""
+			+ f
+			+ "\" AND "
+			+ "lname =\""
+			+ l
+			+ "\";";
+	}
 	
 	// Sporting event is a child of videos
-	public static final String insert = 
-			"INSERT INTO sql367377.SportingEvents ("
-				+ "IDVideo"
-				+ ",teams"
-				+ ",league"
-				+ ") "
-			+ "VALUES ("
-				+ "100"
-				+ ",\"team10 vs opponent15\""
-				+ ",\"football\""
-				+ ");";
+	public static String insert(String t, String d, String s, String n, String r)
+	{ 
+				return	"INSERT INTO sql367377.TVShow ("
+						+ "title"
+						+ ",totalDuration"
+						+ ",synopsys"
+						+ ",network"
+						+ ",pg_rating"
+						+ ") "
+						+ "VALUES ("
+						+ "\"" + t + "\","
+						+ d
+						+ ",\"" + s + "\","
+						+ "\"" + n + "\","
+						+ "\"" + r + "\""
+						+ ");";
+	}
 }
