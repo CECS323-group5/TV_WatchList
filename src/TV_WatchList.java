@@ -98,6 +98,7 @@ public class TV_WatchList
 				String exitAns;
 				do
 				{
+					System.out.println("Before exiting do you want any previous work to be commited or rolled back... (Y/N)");
 					exitAns = scan.nextLine();
 					if(exitAns.toUpperCase().equals("Y"))
 					{
@@ -108,7 +109,6 @@ public class TV_WatchList
 					{
 						break;
 					}
-					System.out.println("Before exiting do you want any previous work to be commited or rolled back... (Y/N)");
 				}while(!(exitAns.toUpperCase().equals("N") || exitAns.toUpperCase().equals("Y")));
 				break;
 			}
@@ -117,7 +117,7 @@ public class TV_WatchList
 
 	private static void showSubMenu()
 	{
-		int choice = 0;
+		String choice = "";
 		
 		do
 		{
@@ -126,23 +126,23 @@ public class TV_WatchList
 					+ "\n3.) Retrieve all the movie title, synopsys and average grade of each video which have a grade and this grade have to be superior than 2."
 					+ "\n4.) Back.");
 			
-			choice = scan.nextInt();
+			choice = scan.nextLine();
 			
-			switch (choice)
+			switch (Integer.valueOf(choice))
 			{
 			case 1:
-				conn.query(Statements.query1, choice);
+				conn.query(Statements.query1, 1);
 				break;
 			case 2:
-				conn.query(Statements.query2, choice);
+				conn.query(Statements.query2, 2);
 				break;
 			case 3:
-				conn.query(Statements.query3, choice);
+				conn.query(Statements.query3, 3);
 				break;
 			case 4:
 				return;
 			}
 			
-		} while (choice != 4);
+		} while (Integer.valueOf(choice) != 4);
 	}
 }
