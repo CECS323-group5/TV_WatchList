@@ -2,12 +2,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TV_WatchList 
-{
-	/*
-	 * Ask About gracefullness
-	 * format
-	 */
-	
+{	
 	public static Scanner scan;
 	public static DBConn conn;
 	
@@ -92,6 +87,7 @@ public class TV_WatchList
 				break;
 			case 5:
 				conn.roll();
+				conn.query(Statements.query4, 4);
 				System.out.println("RollBack changes.");
 				break;
 			case 6:
@@ -121,9 +117,9 @@ public class TV_WatchList
 		
 		do
 		{
-			System.out.println("1.) Retrieve all the videos title, synopsys and the staff name and lastname of the guy which is the olsdest producer."
-					+ "\n2.) Retrieve all the videos which is a SportingEvents and the league is football and show the information about title, sysnopsis, number of staff working on it."
-					+ "\n3.) Retrieve all the movie title, synopsys and average grade of each video which have a grade and this grade have to be superior than 2."
+			System.out.println("1.) Retrieve the first name, last name and date of birth of the oldest producer and display the titles and synopses of his videos."
+					+ "\n2.) Retrieve all the football sporting event videos and display its following information: title, sysopsis, and the number of staff that worked on it."
+					+ "\n3.) Retrieve all the movies with a rating higher than two and display their title, synopsis and average grade."
 					+ "\n4.) Back.");
 			
 			choice = scan.nextLine();
